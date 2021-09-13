@@ -13,7 +13,19 @@ import { NotImplementedError } from '../extensions/index.js';
  * createDreamTeam(['Olivia', 1111, 'Lily', 'Oscar', true, null]) => 'LOO'
  *
  */
-export default function createDreamTeam(/* members */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function removeSpaces(str){
+  str = str.replace(/^\s+|\s+$/g, '')
+  return str;
+}
+
+export default function createDreamTeam(members) {
+  if (!Array.isArray(members))
+    return false;
+  members = members.filter(item => typeof item === 'string')
+
+  members = members.map(str => str.replace(/^\s+|\s+$/g, ''))
+      .map(item=>item.toUpperCase()[0])
+      .sort()
+      .join('')
+  return members;
 }
